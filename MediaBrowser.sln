@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaBrowser", "MediaBrowser\MediaBrowser.csproj", "{376DED60-46BA-41F5-81A2-959DE2B725DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTests", "ModelTests\ModelTests.csproj", "{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{376DED60-46BA-41F5-81A2-959DE2B725DE}.Release|x64.Build.0 = Release|x64
 		{376DED60-46BA-41F5-81A2-959DE2B725DE}.Release|x86.ActiveCfg = Release|x86
 		{376DED60-46BA-41F5-81A2-959DE2B725DE}.Release|x86.Build.0 = Release|x86
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Debug|x86.Build.0 = Debug|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|x64.Build.0 = Release|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|x86.ActiveCfg = Release|Any CPU
+		{040CB021-BFD0-4FB6-94F2-49E77DE48BDE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
