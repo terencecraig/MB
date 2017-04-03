@@ -10,7 +10,7 @@ using FakeItEasy;
 namespace ModelTests
 {
     [TestClass]
-    public class UnitTest1
+    public class MediaDirectoryTests
     {
         [TestMethod]
         public void WatcherFindsAllVideoFiles()
