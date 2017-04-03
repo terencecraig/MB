@@ -17,8 +17,8 @@ namespace ModelTests
         {
 
             var sut = new MediaDirectory(A.Fake<IObservable<FileSystemEventArgs>>());
-            var cnt = sut.MediaFileStream().Subscribe()
-            cnt.Should().BeSameAs(2);
+            sut.MediaFileStream().Subscribe(x => Console.WriteLine(x));
+            Assert.Fail();
         }
 
         [TestMethod]
