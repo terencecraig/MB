@@ -13,16 +13,17 @@ namespace ModelTests
     public class MediaDirectoryTests
     {
         [TestMethod]
-        public void WatcherFindsAllVideoFiles()
+        public void FileEventStreamCapturesMediaChanges()
         {
 
-            var sut = new MediaDirectory(A.Fake<IObservable<FileSystemEventArgs>>());
+            
+            var sut = new MediaDirectory(@"./TestDir", A.Fake<IObservable<FileSystemEventArgs>>());
             sut.MediaFileStream().Subscribe(x => Console.WriteLine(x));
             Assert.Fail();
         }
 
         [TestMethod]
-        public void WatcherFindsAllVideoFilesInSubFolders()
+        public void MediaFilesStreamAllVideoFilesInMediaDirectoryRegardlessOfSubfolderStructure()
         {
             Assert.Fail();
         }

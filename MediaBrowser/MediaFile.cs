@@ -1,14 +1,25 @@
-﻿using System.IO;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace MediaBrowser
 {
     public class MediaFile:IMediaFile
     {
-        private FileSystemEventArgs file;
+        string _path = null;
+        MediaExtensions.MediaType type = MediaExtensions.MediaType.Unknown;
+        
 
-        public MediaFile(FileSystemEventArgs file)
+        public MediaFile(string path)
         {
-            this.file = file;
+            _path = path;
+        }
+
+        public Icon Thumbnail { get; set; } = null;
+        public Task LaunchPlayer()
+        {
+            return Task.CompletedTask;
         }
     }
 }

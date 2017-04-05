@@ -6,37 +6,33 @@ namespace MediaBrowser
 {
     public class MediaDirectory
     {
-        private IObservable<FileSystemEventArgs> _fileStream = null;
-     
-        public MediaDirectory(IObservable<FileSystemEventArgs> fileStream)
+        private string _path;
+        
+        
+
+        public MediaDirectory(string dirpath, IObservable<string> filesStreams, IObservable<FileSystemEventArgs> fileEventsStream)
         {
-            _fileStream = fileStream;
+            this._path = dirpath;
+            this.MediaFileEventsStream
+                = from f in fileEventsStream
+                  where f.IsVideoFile()
+                  select f;
+           filesStreams.
+           
         }
 
+        public IObservable<FileSystemEventArgs> MediaFileEventsStream { get; private set; }
         
+
         public IObservable<IMediaFile> MediaFileStream()
         {
-            return from file in _fileStream
+            return from file in FilesStreams
                    where file.IsVideoFile()
                    select new MediaFile(file);
         }
         private void ProcessDirectoryUpdate(FileSystemEventArgs x)
         {
             
-        }
-    }
-    public static class MediaExtensions
-    {
-        public static bool IsVideoFile(this FileSystemEventArgs self)
-        {
-            var ext = Path.GetExtension(self.FullPath);
-            if (ext.Equals("wmv") ||
-                ext.Equals("mp4") ||
-                    ext.Equals("avi"))
-            {
-                return true;
-            }
-            else return false;
         }
     }
 }
