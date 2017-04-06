@@ -1,0 +1,1 @@
+Media Browser is an OSS project that is mainly a test bed for different distributed architechture problems and technology. 
