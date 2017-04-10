@@ -8,32 +8,25 @@ using MediaBrowser;
 
 using FakeItEasy;
 using System.Reactive.Disposables;
+using System.Collections.Generic;
 
 namespace ModelTests
 {
     [TestClass]
     public class MediaDirectoryTests
     {
-         
+
         [TestMethod]
         public void MediaDirectoryIgnoresNonVideoFiles()
         {
 
-            var foo =   Observable.Create<string>(o =>
-            {
-                o.OnNext("1.avi");
-                o.OnNext("2.avi");
-                o.OnNext("1.mp4");
-                o.OnNext("1.mp23");
-                o.OnCompleted();
-                return Disposable.Empty;
+            var foo = new List<String>() { "1.avi","2.avi", "3.avi"};
 
-            });
-            var sut = new MediaDirectory(foo.ToEnumerable(), 
+            var sut = new MediaDirectory(foo, 
                 A.Fake<IObservable<FileSystemEventArgs>>(), 
                 (x => A.Fake<IMediaFile>()));
 
-            sut.MediaFileStream.Count().ShouldBeEquivalentTo(3);
+            sut.FilesManaged.Count().ShouldBeEquivalentTo(3);
         }
 
         [TestMethod]

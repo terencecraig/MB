@@ -13,7 +13,7 @@ namespace MediaBrowser
     /// 
     /// The Media directory offers the main public UI for the MediaBrowser library. 
     /// </summary>
-    public class MediaDirectory
+    public class MediaDirectory : IMediaDirectory
     {
       
         private readonly IObservable<FileSystemEventArgs> _fileEvents;
@@ -26,7 +26,7 @@ namespace MediaBrowser
         /// </summary>
         ///Media directory is delibertly insulated from the file system. Different implementation of <see cref=">IMediaFile"/> will deal with interactions
         /// with hardware/environment specific services such as playing a video file or retriving an icon.  The default implementation will be for Windows 10. But eventually I would like to write one for the roku. 
-        /// <param name="fileNames"></param>
+        /// <param name="fileNames">IEnumerable of the init</param>
         /// <param name="fileEvents"></param>
         /// 
 
@@ -90,12 +90,12 @@ namespace MediaBrowser
             
         }
 
-        private void Log<T>(string msg, T loggedObject)
+        private void Log<T>(string msg, T loggedObject = null) where T: class
         {
-            Console.WriteLine(msg + loggedObject.ToString());
+             Console.WriteLine(loggedObject != null ? msg + loggedObject.ToString() : msg);
         }
 
-        public IObservable<ICommandEvent> MediaFileStream
+        public IObservable<ICommandEvent> CommandEvents  //Events caused by user action as opposed to File system. 
         {
             get
             {
@@ -110,10 +110,7 @@ namespace MediaBrowser
             
         }
 
-        internal void createFileObs()
-        {
-
-        }
+     
 
     }
 }
