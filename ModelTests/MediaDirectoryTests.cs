@@ -22,8 +22,8 @@ namespace ModelTests
 
             var foo = new List<String>() { "1.avi","2.avi", "3.avi"};
 
-            var sut = new MediaDirectory(foo, 
-                A.Fake<IObservable<FileSystemEventArgs>>(), 
+            var sut = new MediaDirectory("fakedir", 
+                A.Fake<IObservable<IMediaFileEvent>>(), 
                 (x => A.Fake<IMediaFile>()));
 
             sut.FilesManaged.Count().ShouldBeEquivalentTo(3);

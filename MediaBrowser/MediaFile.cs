@@ -26,6 +26,11 @@ namespace MediaBrowser
             return Task.CompletedTask;
         }
 
+        public void Play()
+        {
+            throw new NotImplementedException();
+        }
+
         public MediaFile(string fullPath, IObservable<ICommandEvent> commandStream, IObservable<FileSystemEventArgs> fileEventStream)
         {
             if (fullPath == null)

@@ -13,50 +13,42 @@ namespace MediaBrowser
     /// 
     /// The Media directory offers the main public UI for the MediaBrowser library. 
     /// </summary>
-    public class MediaDirectory : IMediaDirectory
+    public class MediaDirectory : IMediaDirectory, IDisposable
     {
       
-        private readonly IObservable<FileSystemEventArgs> _fileEvents;
-        private readonly IEnumerable<string> _fileNames;
+      
+ 
         private readonly Func<string,IMediaFile> _mediaFileFactory;
-        private IObservable<IMediaFile> _filesManaged;
+        private readonly IObservable<IMediaFileEvent> _fileEvents;
+        private readonly IObservable<IMediaFile> _filesManaged;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         ///Media directory is delibertly insulated from the file system. Different implementation of <see cref=">IMediaFile"/> will deal with interactions
         /// with hardware/environment specific services such as playing a video file or retriving an icon.  The default implementation will be for Windows 10. But eventually I would like to write one for the roku. 
-        /// <param name="fileNames">IEnumerable of the init</param>
+        /// <param name="fileEvent">IEnumerable of the init</param>
         /// <param name="fileEvents"></param>
         /// 
 
-        public MediaDirectory(IEnumerable<string> fileNames, IObservable<FileSystemEventArgs> fileEvents, Func<string,IMediaFile> mediaFileFactory)
+        public MediaDirectory(string uri, IObservable<IMediaFileEvent> fileEvents,  Func<string,IMediaFile> mediaFileFactory)
         {
-            if (fileNames == null)
-                throw new ArgumentNullException(nameof(fileNames));
-
-
             if (fileEvents == null)
                 throw new ArgumentNullException(nameof(fileEvents));
+
+            _fileEvents = fileEvents;
+          
 
             if (mediaFileFactory == null)
                 throw new ArgumentNullException(nameof(mediaFileFactory));
 
             _mediaFileFactory = mediaFileFactory;
 
-            _fileEvents = from ev in fileEvents
-                          where ev.IsVideoFile()
-                          select ev;
-
-            _fileNames = from file in fileNames
-                         where file.IsVideoFile()
-                         select file;
-
-
-            _fileEvents.Subscribe(x =>
+           
+           _fileEvents.Subscribe(x =>
             {
                 Log("Media directory has recieved a FSWE", x);
-                switch (x.ChangeType)
+                switch (x.Action)
                 {
                     case WatcherChangeTypes.Changed:
                         {
@@ -99,18 +91,56 @@ namespace MediaBrowser
         {
             get
             {
-                return null;
+                return _commands;
             }
         }
 
         public IObservable<IMediaFile> FilesManaged { get => _filesManaged;  }
+        public IReactiveFileSystemWatcher Watcher { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void ProcessDirectoryUpdate(FileSystemEventArgs x)
         {
             
         }
 
-     
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+        private readonly IObservable<ICommandEvent> _commands;
+        private readonly IObservable<IMediaFileEvent> _files;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                   (_filesManaged as IDisposable).Dispose();// TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~MediaDirectory() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+
+
 
     }
 }
