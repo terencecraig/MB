@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reactive;
 using System.Reactive.Linq;
+using Microsoft.Reactive.Testing;
 using FluentAssertions;
 using MediaBrowser;
 
@@ -19,13 +20,17 @@ namespace ModelTests
         [TestMethod]
         public void MediaDirectoryIgnoresNonVideoFiles()
         {
-
-            var foo = new List<String>() { "1.avi","2.avi", "3.avi"};
-
-            var sut = new MediaDirectory("fakedir", 
-                A.Fake<IObservable<IMediaFileEvent>>(), 
-                (x => A.Fake<IMediaFile>()));
-
+            var events = new List<IMediaFileEvent>()
+            {
+                new MediaFileEvent("fakedir", WatcherChangeTypes.Created)
+            }
+            .ToObservable();
+            var sut = new MediaDirectory("fakedir",
+                events,
+                (x =>
+              
+                     new MediaFile(x, events)
+                ));
             sut.FilesManaged.Count().ShouldBeEquivalentTo(3);
         }
 

@@ -10,31 +10,38 @@ namespace MediaBrowser
     {
         private readonly IObservable<FileSystemEventArgs> _fileEvents;
         private readonly ISubject<IMediaFileEvent> _mediaEvents = new Subject<IMediaFileEvent>();
-        private readonly Func<string,IMediaDirectory> _directoryFactory;
+        private readonly Func<string,IReactiveFileSystemWatcher,IMediaDirectory> _directoryFactory;
         private readonly IDictionary<string, IMediaDirectory> MapFileWatchers = new Dictionary<string, IMediaDirectory>();
+        private readonly ILogger _log;
 
-        public BaseMediaServer( IMediaServerConfiguration config, Func<string,IMediaDirectory> directoryFactory, ILogger log)
+        public BaseMediaServer( IMediaServerConfiguration config, 
+            Func<string,IReactiveFileSystemWatcher,
+            MediaDirectory> directoryFactory, 
+            ILogger log)
         {
             if (directoryFactory == null)
                 throw new ArgumentNullException(nameof(directoryFactory));
 
-            Configure(config); //Restore persistance settings. 
-            
+            if (log == null)
+                throw new ArgumentNullException(nameof(log));
+
+            //Configure(config); //Restore persistance settings. 
+
             _directoryFactory = directoryFactory;
+            _log = log;
         }
 
         private void Configure(IMediaServerConfiguration config)
         {
-            throw new NotImplementedException();
+           
         }
 
         public void AddMediaDirectory(string uri)
         {
+            //TODO: Replace with an autofac Resolve call. 
             var rsw = new ReactiveFileSystemWatcher(new FileSystemWatcher(uri)); //Set watch on the directory. 
-            var dir = _directoryFactory(uri);
-            dir.Watcher = rsw;
+            var dir = _directoryFactory(uri,rsw);
             MapFileWatchers[uri] = dir;
-
         }
 
     }

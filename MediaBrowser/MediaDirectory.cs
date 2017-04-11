@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace MediaBrowser
 {
     /// <summary>
@@ -48,7 +49,7 @@ namespace MediaBrowser
            _fileEvents.Subscribe(x =>
             {
                 Log("Media directory has recieved a FSWE", x);
-                switch (x.Action)
+                switch (x.FileAction)
                 {
                     case WatcherChangeTypes.Changed:
                         {

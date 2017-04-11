@@ -4,7 +4,7 @@ namespace MediaBrowser
 {
     public interface IMediaFileEvent
     {
-        WatcherChangeTypes Action { get;  }
+        WatcherChangeTypes FileAction { get;  }
         string FileID { get; }
 
 

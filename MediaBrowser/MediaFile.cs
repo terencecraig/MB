@@ -10,14 +10,14 @@ namespace MediaBrowser
     {
         
         MediaExtensions.MediaType type = MediaExtensions.MediaType.Unknown;
-        IObservable<FileSystemEventArgs> _fileEventStream = null;
-        private string _fullPath;
+        IObservable<IMediaFileEvent> _fileEventStream = null;
+        private string _uri;
         private readonly IObservable<ICommandEvent> _commandStream;
 
         public Icon Thumbnail { get; set; } = null;
         public string FullPath
         {
-            get { return _fullPath; }
+            get { return _uri; }
         }
 
         private Task LaunchPlayer() //Delibertly private will only be called as an observable side effect to IPlayEvent ....
@@ -31,22 +31,19 @@ namespace MediaBrowser
             throw new NotImplementedException();
         }
 
-        public MediaFile(string fullPath, IObservable<ICommandEvent> commandStream, IObservable<FileSystemEventArgs> fileEventStream)
+        public MediaFile(string uri,  IObservable<IMediaFileEvent> fileEventStream)
         {
-            if (fullPath == null)
-                throw new ArgumentNullException(nameof(fullPath));
+            if (uri == null)
+                throw new ArgumentNullException(nameof(uri));
 
-            if (commandStream == null)
-                throw new ArgumentNullException(nameof(commandStream));
+           
 
-            _fullPath = fullPath;
+            _uri = uri;
 
             _fileEventStream = from fev in fileEventStream
-                               where fev.FullPath == FullPath
+                               where fev.FileID == uri
                                select fev;
-            _commandStream = from cmd in commandStream
-                             where cmd.TargetID == FullPath
-                             select cmd;
+          
         }
 
     }
