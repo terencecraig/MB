@@ -55,7 +55,7 @@ namespace ModelTests
 
         {
 
-
+            Assert.Fail();
             var scheduler = new TestScheduler();
             scheduler.AdvanceBy(10);
 
@@ -68,6 +68,9 @@ namespace ModelTests
             IObservable<IMediaDirectory> foo = sut.Directories;
             IObservable<IMediaFile> bar = sut.MediaFiles;
             Action a = () => sut.AddMediaDirectory("");
+
+         
+            /*
             scheduler.Schedule(a());
            
             //Schedule the OnNext
@@ -80,8 +83,9 @@ namespace ModelTests
             _schedulerProvider.Dispatcher.AdvanceBy(1);
             Assert.AreEqual(1, _viewModel.Prices.Count);
             Assert.AreEqual(expected, _viewModel.Prices.First());
-            Assert.Fail();
-            a.ShouldThrow<ArgumentException>();
+            
+            
+            */
         }
 
 
