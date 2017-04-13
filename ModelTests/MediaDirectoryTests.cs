@@ -1,37 +1,31 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reactive;
 using System.Reactive.Linq;
-using Microsoft.Reactive.Testing;
+//using Microsoft.Reactive.Testing;
 using FluentAssertions;
 using MediaBrowser;
-
-using FakeItEasy;
-using System.Reactive.Disposables;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ModelTests
 {
     [TestClass]
     public class MediaDirectoryTests
     {
-
+        
         [TestMethod]
         public void MediaDirectoryIgnoresNonVideoFiles()
         {
+  
             var events = new List<IMediaFileEvent>()
             {
                 new MediaFileEvent("fakedir", WatcherChangeTypes.Created)
-            }
-            .ToObservable();
-            var sut = new MediaDirectory("fakedir",
-                events,
-                (x =>
-              
-                     new MediaFile(x, events)
-                ));
-            sut.FilesManaged.Count().ShouldBeEquivalentTo(3);
+            }.ToObservable();
+            var sut = new MediaDirectory("fakedir", events, (x => new MediaFile(x, events)));
+            sut
+                .FilesManaged
+                .Count()
+                .ShouldBeEquivalentTo(3);
         }
 
         [TestMethod]

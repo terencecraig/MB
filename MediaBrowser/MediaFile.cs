@@ -33,12 +33,7 @@ namespace MediaBrowser
 
         public MediaFile(string uri,  IObservable<IMediaFileEvent> fileEventStream)
         {
-            if (uri == null)
-                throw new ArgumentNullException(nameof(uri));
-
-           
-
-            _uri = uri;
+            _uri = uri ?? throw new ArgumentNullException(nameof(uri));
 
             _fileEventStream = from fev in fileEventStream
                                where fev.FileID == uri

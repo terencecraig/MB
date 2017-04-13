@@ -19,16 +19,11 @@ namespace MediaBrowser
             MediaDirectory> directoryFactory, 
             ILogger log)
         {
-            if (directoryFactory == null)
-                throw new ArgumentNullException(nameof(directoryFactory));
-
-            if (log == null)
-                throw new ArgumentNullException(nameof(log));
 
             //Configure(config); //Restore persistance settings. 
 
-            _directoryFactory = directoryFactory;
-            _log = log;
+            _directoryFactory = directoryFactory ?? throw new ArgumentNullException(nameof(directoryFactory));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         private void Configure(IMediaServerConfiguration config)

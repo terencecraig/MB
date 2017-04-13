@@ -34,16 +34,8 @@ namespace MediaBrowser
 
         public MediaDirectory(string uri, IObservable<IMediaFileEvent> fileEvents,  Func<string,IMediaFile> mediaFileFactory)
         {
-            if (fileEvents == null)
-                throw new ArgumentNullException(nameof(fileEvents));
-
-            _fileEvents = fileEvents;
-          
-
-            if (mediaFileFactory == null)
-                throw new ArgumentNullException(nameof(mediaFileFactory));
-
-            _mediaFileFactory = mediaFileFactory;
+            _fileEvents = fileEvents ?? throw new ArgumentNullException(nameof(fileEvents));
+            _mediaFileFactory = mediaFileFactory ?? throw new ArgumentNullException(nameof(mediaFileFactory));
 
            
            _fileEvents.Subscribe(x =>
