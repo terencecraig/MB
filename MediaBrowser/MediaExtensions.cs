@@ -7,6 +7,10 @@ namespace MediaBrowser
 {
     public static class MediaExtensions
     {
+        public static bool IsValidString(this string testString)
+        {
+            return string.IsNullOrEmpty(testString);
+        }
         public enum MediaType {avi,wmv, mp4, Unknown };
         public static bool IsVideoFile(this string fullPath)
         {

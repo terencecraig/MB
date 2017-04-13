@@ -23,15 +23,7 @@ namespace MediaBrowser
         private readonly IObservable<IMediaFileEvent> _fileEvents;
         private readonly IObservable<IMediaFile> _filesManaged;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        ///Media directory is delibertly insulated from the file system. Different implementation of <see cref=">IMediaFile"/> will deal with interactions
-        /// with hardware/environment specific services such as playing a video file or retriving an icon.  The default implementation will be for Windows 10. But eventually I would like to write one for the roku. 
-        /// <param name="fileEvent">IEnumerable of the init</param>
-        /// <param name="fileEvents"></param>
-        /// 
-
+      
         public MediaDirectory(string uri, IObservable<IMediaFileEvent> fileEvents,  Func<string,IMediaFile> mediaFileFactory)
         {
             _fileEvents = fileEvents ?? throw new ArgumentNullException(nameof(fileEvents));
