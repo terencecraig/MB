@@ -8,6 +8,7 @@ using FluentAssertions;
 using MediaBrowser;
 using System.Collections.Generic;
 using System.Linq;
+using VFS;
 
 namespace ModelTests
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MediaBrowser
+namespace VFS 
 {
     public interface IReactiveFileSystemWatcher
     {

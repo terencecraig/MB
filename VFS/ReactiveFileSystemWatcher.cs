@@ -1,7 +1,11 @@
-﻿using System;
+﻿//This class ReactiveFileSystemWatcher was copied from 
+//https://github.com/g0t4/Rx-FileSystemWatcher all credit to the original author. 
+//Any mistakes added are mine. I would have just used the nuget package but it is not 
+//compatable with RX 3 the current version at the time of this writing.
+using System;
 using System.IO;
 
-namespace MediaBrowser
+namespace VFS
 {
    
         using System;

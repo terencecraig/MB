@@ -1,11 +1,11 @@
 ﻿using System.IO;
 
-namespace MediaBrowser
+namespace VFS
 {
     public interface IMediaFileEvent
     {
         WatcherChangeTypes FileAction { get;  }
-        string FileID { get; }
+        string FileURI { get; }
 
 
     }
