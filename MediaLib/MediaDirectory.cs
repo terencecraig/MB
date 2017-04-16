@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace VFS
+namespace MediaLib
 {
     /// <summary>
     /// The media directory is the domain root for this application. In keeping with SOLID principles & the Reactive manifesto this class is designed 

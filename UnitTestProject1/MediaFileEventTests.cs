@@ -1,18 +1,14 @@
-﻿using System; 
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
+
 using System.Reactive.Linq;
 //using Microsoft.Reactive.Testing;
-using FluentAssertions;
-
-using MediaBrowser;
 using System.Collections.Generic;
-using System.Linq;
-using VFS;
+using MediaLib;
+using Xunit;
 
 namespace ModelTests
 {
-    [TestClass]
+    
     public class MediaEventTests
     {
 

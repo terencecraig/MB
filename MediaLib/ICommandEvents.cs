@@ -1,6 +1,6 @@
-﻿using VFS;
+﻿using MediaLib;
 
-namespace VFS
+namespace MediaLib
 {
     public interface ICommandEvent
     {

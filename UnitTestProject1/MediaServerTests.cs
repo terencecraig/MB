@@ -1,23 +1,24 @@
 ﻿using System; 
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System.Reactive.Linq;
 using Microsoft.Reactive.Testing;
 using FluentAssertions;
-using MediaBrowser;
+
 using System.Collections.Generic;
 using System.Linq;
 using FakeItEasy;
-using System.Reactive.Concurrency;
-using VFS;
+
+using MediaLib;
+using Xunit;
 
 namespace ModelTests
 {
-    [TestClass]
+  
     public class MediaServerTests
     {
         
-        [TestMethod]
+        [Fact]
         public void ExceptionIsThrownForNullDirectory()
         {
             var sut = new BaseMediaServer(A.Fake<IMediaServerConfiguration>(),
@@ -32,7 +33,7 @@ namespace ModelTests
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ExceptionIsThrownForEmptyURI()
         //Bad in this case means not a valid file system
         //for the particular directory implementation invoked.
@@ -51,12 +52,12 @@ namespace ModelTests
         }
 
 
-         [TestMethod]
+         [Fact]
         public void EventuallyAnExceptionIsThrownForNonExistantContainerURI()
 
         {
 
-            Assert.Fail();
+           
             var scheduler = new TestScheduler();
             scheduler.AdvanceBy(10);
 

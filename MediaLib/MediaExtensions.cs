@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Reactive;
 using System.IO;
 
-namespace VFS
+namespace MediaLib
 {
     public static class MediaExtensions
     {

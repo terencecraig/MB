@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
 
-namespace VFS
+namespace MediaLib
 {    public class MediaFile: IMediaFile
     {
         

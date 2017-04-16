@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reactive.Subjects;
 
-namespace VFS
+namespace MediaLib
 {
     public class BaseMediaServer:IMediaServer
     {

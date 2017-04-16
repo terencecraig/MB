@@ -1,4 +1,4 @@
-﻿namespace VFS
+﻿namespace MediaLib
 {
     public interface IMediaServer
     {
