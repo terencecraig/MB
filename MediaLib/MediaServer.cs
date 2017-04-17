@@ -9,16 +9,15 @@ namespace MediaLib
     {
         private readonly IObservable<FileSystemEventArgs> _fileEvents;
         private readonly ISubject<IMediaFileEvent> _mediaEvents = new Subject<IMediaFileEvent>();
-        private readonly Func<string,IReactiveFileSystemWatcher,IMediaDirectory> _directoryFactory;
+        private readonly Func<string,IMediaFileWatcher,IMediaDirectory> _directoryFactory;
         private readonly IDictionary<string, IMediaDirectory> _mapFileWatchers = new Dictionary<string, IMediaDirectory>();
         private readonly dynamic _log;
 
         public IObservable<IMediaDirectory> Directories { get; set; }
         public IObservable<IMediaFile> MediaFiles { get; set; }
 
-        public BaseMediaServer( IMediaServerConfiguration config, 
-            Func<string,IReactiveFileSystemWatcher,
-            MediaDirectory> directoryFactory, 
+        public BaseMediaServer(IMediaServerConfiguration config, 
+            Func<string,IMediaFileWatcher, IMediaDirectory> directoryFactory, 
             dynamic log)
         {
 
@@ -40,7 +39,7 @@ namespace MediaLib
                 throw new ArgumentException($"The parameter {nameof(uri)} was null or empty");
             }
             //TODO: Replace with an autofac Resolve call. This will make the DI module the only place in the code that is platform aware. 
-            var rsw = new ReactiveFileSystemWatcher(new FileSystemWatcher(uri)); //Set watch on the directory. 
+            var rsw = new MediaFileWatcher(new FileSystemWatcher(uri)); //Set watch on the directory. 
             var dir = _directoryFactory(uri, rsw);
             _mapFileWatchers[uri] = dir;
         }

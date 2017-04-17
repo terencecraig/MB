@@ -2,7 +2,7 @@
 using Microsoft.Reactive.Testing;
 using Xunit;
 
-namespace ModelTests
+namespace MediaLib
 {
 
     public class MediaDirectoryTests

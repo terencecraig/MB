@@ -81,12 +81,8 @@ namespace MediaLib
         }
 
         public IObservable<IMediaFile> FilesManaged { get => _filesManaged;  }
-        public IReactiveFileSystemWatcher Watcher { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IReactiveFileSystemWatcher<IMediaFileEvent> Watcher { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        private void ProcessDirectoryUpdate(FileSystemEventArgs x)
-        {
-            
-        }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

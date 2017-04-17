@@ -12,17 +12,17 @@ using FakeItEasy;
 using MediaLib;
 using Xunit;
 
-namespace ModelTests
+namespace MediaLibTests
 {
   
     public class MediaServerTests
     {
         
         [Fact]
-        public void ExceptionIsThrownForNullDirectory()
+        public void ExceptionIsThrownForNullDirectoryURI()
         {
             var sut = new BaseMediaServer(A.Fake<IMediaServerConfiguration>(),
-                (string s, IReactiveFileSystemWatcher rsw) => A.Fake<MediaDirectory>(),  
+                (s,  rsw) => A.Fake<IMediaDirectory>(),  
                 A.Fake<object>());
 
            Action a = () => sut.AddMediaDirectory(null);
@@ -44,7 +44,7 @@ namespace ModelTests
             //exist at the time the MediaDirectory is created that doesn't mean it won't be there before execution stops being deferred. 
             //Note that a non-existant directory is different from an empty one. Non existant directories will cause an exeception on subscription.  
             var sut = new BaseMediaServer(A.Fake<IMediaServerConfiguration>(),
-                (string s, IReactiveFileSystemWatcher rsw) => A.Fake<MediaDirectory>(),  //Nasty. 
+                (s, rsw) => A.Fake<MediaDirectory>(),  //TODO: Clean up signature and a real logging factory.
                 A.Fake<object>());
 
             Action a = () => sut.AddMediaDirectory("");
@@ -54,7 +54,6 @@ namespace ModelTests
 
          [Fact]
         public void EventuallyAnExceptionIsThrownForNonExistantContainerURI()
-
         {
 
            
@@ -65,7 +64,7 @@ namespace ModelTests
             //exist at the time the MediaDirectory is created that doesn't mean it won't be there before execution stops being deferred. 
             //Note that a non-existant directory is different from an empty one. Non existant directories will cause an exeception on subscription.  
             var sut = new BaseMediaServer(A.Fake<IMediaServerConfiguration>(),
-                (string s, IReactiveFileSystemWatcher rsw) => A.Fake<MediaDirectory>(),  //Nasty. 
+                (string s, IMediaFileWatcher rsw) => A.Fake<MediaDirectory>(),  //Nasty. 
                 A.Fake<object>());
             IObservable<IMediaDirectory> foo = sut.Directories;
             IObservable<IMediaFile> bar = sut.MediaFiles;

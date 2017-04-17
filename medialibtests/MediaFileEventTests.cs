@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using MediaLib;
 using Xunit;
 
-namespace ModelTests
+namespace MediaLibTests
 {
     
     public class MediaEventTests

@@ -3,15 +3,14 @@ using System.IO;
 
 namespace MediaLib 
 {
-    public interface IReactiveFileSystemWatcher
+    public interface IReactiveFileSystemWatcher<T>:IDisposable
     {
-        IObservable<FileSystemEventArgs> Changed { get; }
-        IObservable<FileSystemEventArgs> Created { get; }
-        IObservable<FileSystemEventArgs> Deleted { get; }
-        IObservable<ErrorEventArgs> Errors { get; }
-        IObservable<RenamedEventArgs> Renamed { get; }
+        IObservable<T> Changed { get; }
+        IObservable<T> Created { get; }
+        IObservable<T> Deleted { get; }
+        IObservable<T> Errors { get; }
+        IObservable<T> Renamed { get; }
 
-        void Dispose();
         void Start();
         void Stop();
     }
