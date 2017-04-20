@@ -26,10 +26,7 @@ namespace MediaLibTests
                 A.Fake<object>());
 
            Action a = () => sut.AddMediaDirectory(null);
-          
-            
-                 
-                 a.ShouldThrow<ArgumentException>();
+           a.ShouldThrow<ArgumentException>();
         }
 
 
@@ -55,8 +52,6 @@ namespace MediaLibTests
          [Fact]
         public void EventuallyAnExceptionIsThrownForNonExistantContainerURI()
         {
-
-           
             var scheduler = new TestScheduler();
             scheduler.AdvanceBy(10);
 
@@ -69,8 +64,6 @@ namespace MediaLibTests
             IObservable<IMediaDirectory> foo = sut.Directories;
             IObservable<IMediaFile> bar = sut.MediaFiles;
             Action a = () => sut.AddMediaDirectory("");
-
-         
             /*
             scheduler.Schedule(a());
            

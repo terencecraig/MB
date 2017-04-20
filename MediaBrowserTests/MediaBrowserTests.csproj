@@ -1,12 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="FakeItEasy" Version="3.2.0" />
+    <PackageReference Include="FluentAssertions" Version="4.19.2" />
+    <PackageReference Include="Microsoft.Reactive.Testing" Version="3.1.1" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
+    <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediaLib\MediaLib.csproj" />
   </ItemGroup>
 
 </Project>

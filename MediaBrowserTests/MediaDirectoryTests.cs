@@ -2,14 +2,12 @@
 using Microsoft.Reactive.Testing;
 using Xunit;
 
-namespace MediaLib
+namespace MediaBrowserTests
 {
 
     public class MediaDirectoryTests
     {
         
-       
-
         [Fact]
         public void MediaFilesStreamAllVideoFilesInMediaDirectoryRegardlessOfSubfolderStructure()
         {

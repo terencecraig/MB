@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using MediaLib;
 using Xunit;
 
-namespace MediaLibTests
+namespace MediaBrowserTests
 {
     
     public class MediaEventTests
@@ -15,7 +15,8 @@ namespace MediaLibTests
 
         dynamic events = new List<IMediaFileEvent>()
             {
-                new MediaFileEvent("fakedir", WatcherChangeTypes.Created)
+                new MediaFileEvent("fakedir", 
+                    WatcherChangeTypes.Created)
             }.ToObservable();
 
     }
